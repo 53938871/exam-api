@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lookask.api.mapper.ExamManagementMapper">
+
+    <resultMap id="blogResult" type="ExamManagement">
+    <id property="id" column="id"/>
+        
+        <result property="name" column="name"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="duration" column="duration"/>
+        <result property="majorId" column="major_id"/>
+        <result property="majorName" column="major_name"/>
+        <result property="gradeId" column="grade_id"/>
+        <result property="gradeName" column="grade_name"/>
+        <result property="location" column="location"/>
+        <result property="createTime" column="create_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into exam_management(
+           name,
+           start_time,
+           end_time,
+           duration,
+           major_id,
+           major_name,
+           grade_id,
+           grade_name,
+           location,
+           create_time,
+           status
+           
+        )values(
+           #{name},
+           #{startTime},
+           #{endTime},
+           #{duration},
+           #{majorId},
+           #{majorName},
+           #{gradeId},
+           #{gradeName},
+           #{location},
+           #{createTime},
+           #{status}
+           
+        ) 
+    </insert>
+    
+    <delete id="delete" parameterType="long">
+    	delete from exam_management where id=#{id}
+    </delete>
+    
+    <update id="update">
+    	 update exam_management set
+    	 name=#{name},
+    	 start_time=#{startTime},
+    	 end_time=#{endTime},
+    	 duration=#{duration},
+    	 major_id=#{majorId},
+    	 major_name=#{majorName},
+    	 grade_id=#{gradeId},
+    	 grade_name=#{gradeName},
+    	 location=#{location},
+    	 create_time=#{createTime},
+    	 status=#{status}
+    	 where id = #{id}
+    </update>
+    
+    <select id="findById" resultType="com.lookask.api.domain.ExamManagement" parameterType="long">
+        select * from exam_management where id=#{id}
+    </select>
+      
+</mapper>

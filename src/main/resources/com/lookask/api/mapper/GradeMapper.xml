@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lookask.api.mapper.GradeMapper">
+
+    <resultMap id="blogResult" type="Grade">
+    <id property="id" column="id"/>
+        
+        <result property="name" column="name"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+    
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into grade(
+           name,
+           remark
+           
+        )values(
+           #{name},
+           #{remark}
+           
+        ) 
+    </insert>
+    
+    <delete id="delete" parameterType="long">
+    	delete from grade where id=#{id}
+    </delete>
+    
+    <update id="update">
+    	 update grade set
+    	 name=#{name},
+    	 remark=#{remark}
+    	 where id = #{id}
+    </update>
+    
+    <select id="findById" resultType="com.lookask.api.domain.Grade" parameterType="long">
+        select * from grade where id=#{id}
+    </select>
+      
+</mapper>

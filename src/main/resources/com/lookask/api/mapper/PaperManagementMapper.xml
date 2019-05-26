@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lookask.api.mapper.PaperManagementMapper">
+
+    <resultMap id="blogResult" type="PaperManagement">
+    <id property="id" column="id"/>
+        
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="questions" column="questions"/>
+        <result property="majorId" column="major_id"/>
+        <result property="majorName" column="major_name"/>
+        <result property="gradeId" column="grade_id"/>
+        <result property="gradeName" column="grade_name"/>
+        <result property="score" column="score"/>
+        <result property="createTime" column="create_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into paper_management(
+           name,
+           code,
+           questions,
+           major_id,
+           major_name,
+           grade_id,
+           grade_name,
+           score,
+           create_time,
+           status
+           
+        )values(
+           #{name},
+           #{code},
+           #{questions},
+           #{majorId},
+           #{majorName},
+           #{gradeId},
+           #{gradeName},
+           #{score},
+           #{createTime},
+           #{status}
+           
+        ) 
+    </insert>
+    
+    <delete id="delete" parameterType="long">
+    	delete from paper_management where id=#{id}
+    </delete>
+    
+    <update id="update">
+    	 update paper_management set
+    	 name=#{name},
+    	 code=#{code},
+    	 questions=#{questions},
+    	 major_id=#{majorId},
+    	 major_name=#{majorName},
+    	 grade_id=#{gradeId},
+    	 grade_name=#{gradeName},
+    	 score=#{score},
+    	 create_time=#{createTime},
+    	 status=#{status}
+    	 where id = #{id}
+    </update>
+    
+    <select id="findById" resultType="com.lookask.api.domain.PaperManagement" parameterType="long">
+        select * from paper_management where id=#{id}
+    </select>
+      
+</mapper>

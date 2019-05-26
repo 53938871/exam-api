@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lookask.api.mapper.ChoiceQuestionsMapper">
+
+    <resultMap id="blogResult" type="ChoiceQuestions">
+    <id property="id" column="id"/>
+        
+        <result property="type" column="type"/>
+        <result property="question" column="question"/>
+        <result property="answer" column="answer"/>
+        <result property="level" column="level"/>
+        <result property="majorId" column="major_id"/>
+        <result property="majorName" column="major_name"/>
+        <result property="gradeId" column="grade_id"/>
+        <result property="gradeName" column="grade_name"/>
+        <result property="solution" column="solution"/>
+        <result property="createTime" column="create_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into choice_questions(
+           type,
+           question,
+           answer,
+           level,
+           major_id,
+           major_name,
+           grade_id,
+           grade_name,
+           solution,
+           create_time,
+           status
+           
+        )values(
+           #{type},
+           #{question},
+           #{answer},
+           #{level},
+           #{majorId},
+           #{majorName},
+           #{gradeId},
+           #{gradeName},
+           #{solution},
+           #{createTime},
+           #{status}
+           
+        ) 
+    </insert>
+    
+    <delete id="delete" parameterType="long">
+    	delete from choice_questions where id=#{id}
+    </delete>
+    
+    <update id="update">
+    	 update choice_questions set
+    	 type=#{type},
+    	 question=#{question},
+    	 answer=#{answer},
+    	 level=#{level},
+    	 major_id=#{majorId},
+    	 major_name=#{majorName},
+    	 grade_id=#{gradeId},
+    	 grade_name=#{gradeName},
+    	 solution=#{solution},
+    	 create_time=#{createTime},
+    	 status=#{status}
+    	 where id = #{id}
+    </update>
+    
+    <select id="findById" resultType="com.lookask.api.domain.ChoiceQuestions" parameterType="long">
+        select * from choice_questions where id=#{id}
+    </select>
+      
+</mapper>
